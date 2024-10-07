@@ -1,0 +1,46 @@
+.create-event-button {
+    margin-bottom: 20px;
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 6px 4px rgba(32, 32, 32, 0.1);
+    transition: all 0.2s ease-in-out;
+    margin-left: 20px;
+    font-size: 1rem;
+}
+
+.create-event-button:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.create-event-button img {
+    width: 28px;
+    height: 28px;
+}
+
+.create-event-button span {
+    padding-left: 0.75rem;
+    padding-right: 1.75rem;
+
+}
+
+@media (max-width: 768px) {
+    .create-event-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+       
+    }
+
+    .create-event-button img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+
+.hidden {
+    display: none;
+}

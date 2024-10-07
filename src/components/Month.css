@@ -1,0 +1,14 @@
+/* Month.css */
+.month-container {
+    display: flex; /* Flexbox for the main container */
+    flex-direction: column; /* Arrange items in a column */
+    flex: 1; /* Fill the remaining space */
+  }
+  
+  .grid {
+    display: grid; /* Use CSS Grid for layout */
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for the days */
+    grid-template-rows: repeat(5, 1fr); /* 5 rows for weeks */
+    gap: 1rem; /* Space between grid items */
+  }
+  

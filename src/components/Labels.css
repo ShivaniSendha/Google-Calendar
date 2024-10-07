@@ -1,0 +1,29 @@
+/* Labels.css */
+.labels-container {
+  margin-top: 2.5rem;
+  margin-left: 20px;
+}
+
+.label-title {
+  color: #a0aec0;
+  font-weight: bold;
+}
+
+.label-item {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: #4a90e2;
+  cursor: pointer;
+
+}
+
+.label-text {
+  margin-left: 0.5rem;
+  color: #4a5568;
+}

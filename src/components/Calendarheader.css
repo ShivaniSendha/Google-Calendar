@@ -1,0 +1,168 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+
+  background-color: white;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+}
+
+.header img {
+  margin-right: 8px;
+
+  width: 48px;
+  height: 48px;
+
+}
+
+.header h1 {
+  margin-right: 20px;
+  font-size: 1.25rem;
+  color: #4A5568;
+  font-weight: bold;
+
+
+}
+
+.header button {
+  border: 1px solid #E2E8F0;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 0.875rem;
+
+}
+
+.header button:hover {
+  background-color: #E2E8F0;
+
+}
+
+.header h2 {
+  margin-left: 16px;
+  font-size: 1.25rem;
+  color: #4A5568;
+  font-weight: bold;
+
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+   
+  }
+
+  .header h1 {
+    margin: 10px 0;
+
+  }
+
+  .header h2 {
+    margin: 10px 0;
+
+  }
+
+  .header button {
+    width: 100%;
+    margin: 5px 0;
+  
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f4f4f4;
+}
+
+.user-profile {
+  position: relative;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 250px;
+  transition: all 0.3s ease;
+}
+
+.dropdown-menu h3 {
+  margin: 0 0 10px;
+  font-size: 1.2em;
+}
+
+.dropdown-menu button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+ cursor: pointer;
+  margin-bottom: 10px;
+ 
+  transition: background-color 0.3s;
+ 
+}
+
+.dropdown-menu button:hover {
+  background-color: #e0e0e0;
+
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    width: 90%;
+  
+    left: 5%;
+    right: auto;
+
+  }
+}
+
+@media (max-width: 480px) {
+  .dropdown-menu {
+    width: 100%;
+  }
+
+  .dropdown-menu h3 {
+    font-size: 1em;
+  }
+}
+
+
+.error-message {
+  color: red;
+}
