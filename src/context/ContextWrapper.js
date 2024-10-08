@@ -28,7 +28,7 @@ export default function ContextWrapper({ children }) {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [labels, setLabels] = useState([]);
   const [savedEvents, dispatchCalEvent] = useReducer(savedEventsReducer, [], initEvents);
-
+  const [view, setView] = useState("month")
   const filteredEvents = useMemo(() => {
     const activeLabels = labels.filter(lbl => lbl.checked).map(lbl => lbl.label);
     return savedEvents.filter(evt => activeLabels.includes(evt.label));
@@ -78,6 +78,8 @@ export default function ContextWrapper({ children }) {
       setLabels,
       updateLabel,
       filteredEvents,
+      view, 
+      setView, 
     }}>
       {children}
     </GlobalContext.Provider>

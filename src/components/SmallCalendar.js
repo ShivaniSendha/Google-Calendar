@@ -37,11 +37,11 @@ export default function SmallCalendar() {
     const currDay = day.format(format);
     const slcDay = daySelected && daySelected.format(format);
     if (nowDay === currDay) {
-      return "current-day"; // Class for today
+      return "current-day"; 
     } else if (currDay === slcDay) {
-      return "selected-day"; // Class for selected day
+      return "selected-day"; 
     } else {
-      return ""; // Default class
+      return ""; 
     }
   }
 

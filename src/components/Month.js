@@ -9,7 +9,12 @@ export default function Month({ month }) {
         {month.map((row, i) => (
           <React.Fragment key={i}>
             {row.map((day, idx) => (
-              <Day day={day} key={idx} rowIdx={i} />
+              <Day
+                day={day}
+                key={idx}
+                rowIdx={i}
+                isSunday={day.day() === 0} // Pass Sunday check
+              />
             ))}
           </React.Fragment>
         ))}

@@ -1,53 +1,59 @@
-import React, { useState, useContext, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+// App.js
+import React, { useState, useEffect, useContext } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { getMonth } from "./util";
 import CalendarHeader from "./components/CalendarHeader";
 import Sidebar from "./components/Sidebar";
-import Month from "./components/Month";
 import GlobalContext from "./context/GlobalContext";
 import EventModal from "./components/EventModal";
 import Signup from "./components/User/SignUp";
 import Login from "./components/User/Login";
-import EventFetcher from "./components/EventFetch";
+import WeekView from "./components/Weekview";
+import Month from "./components/Month";
+import BookingList from "./components/BookinList";
+
 
 function App() {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
-  const { monthIndex, showEventModal } = useContext(GlobalContext);
+  const { monthIndex, showEventModal, view } = useContext(GlobalContext);
+  const [showBookings, setShowBookings] = useState(false); 
 
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex]);
 
+  const toggleBookings = () => {
+    setShowBookings((prev) => !prev);
+  };
+
   return (
     <Router>
       <React.Fragment>
-        <EventFetcher />
         {showEventModal && <EventModal />}
 
         <Routes>
-          {/* Signup Route */}
           <Route path="/" element={<Signup />} />
-
-          {/* Login Route */}
           <Route path="/login" element={<Login />} />
-
-          {/* Month (Calendar) Route */}
           <Route
             path="/month"
             element={
               <div className="h-screen flex flex-col">
-                <CalendarHeader />
+                <CalendarHeader toggleBookings={toggleBookings} /> 
                 <div className="flex flex-1">
                   <Sidebar />
-                  <Month month={currentMonth} />
+                  {showBookings ? (
+                    <BookingList />
+                  ) : (
+                    <>
+                      {view === "month" && <Month month={currentMonth} />}
+                      {view === "week" && <WeekView />}
+                    </>
+                  )}
                 </div>
               </div>
             }
           />
-
-          {/* Redirect from any other path to Signup */}
-          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </React.Fragment>
     </Router>

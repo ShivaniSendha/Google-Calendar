@@ -2,55 +2,28 @@ import React, { useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import logo from "../assets/logo.png";
 import GlobalContext from "../context/GlobalContext";
-
-import '../components/Calendarheader.css';
 import AuthContext from "../context/UserContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import '../components/Calendarheader.css';
 
-export default function CalendarHeader() {
-  const { monthIndex, setMonthIndex } = useContext(GlobalContext);
-  const { user, logout } = useContext(AuthContext) || {}; // Provide a fallback
+export default function CalendarHeader({ toggleBookings }) {
+  const { monthIndex, setMonthIndex, setView, setDaySelected } = useContext(GlobalContext);
+  const { user } = useContext(AuthContext) || {};
   const [users, setUsers] = useState({});
   const [menuOpen, setMenuOpen] = useState(false);
   const [editingProfile, setEditingProfile] = useState(false);
   const [newUsername, setNewUsername] = useState(user ? user.username : '');
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate()
-  function handlePrevMonth() {
-    setMonthIndex(monthIndex - 1);
-  }
+  const navigate = useNavigate();
 
-  function handleNextMonth() {
-    setMonthIndex(monthIndex + 1);
-  }
-
-  function handlePrevMonth() {
-    setMonthIndex(monthIndex - 1);
-  }
-
-  function handleNextMonth() {
-    setMonthIndex(monthIndex + 1);
-  }
-
-  function handleReset() {
-    setMonthIndex(monthIndex === dayjs().month() ? monthIndex + Math.random() : dayjs().month());
-  }
-
-  const fetchUserProfile = () => {
+  useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (storedUser) {
       setUsers(storedUser);
       setNewUsername(storedUser.username);
-      console.log('username', newUsername);
-
     }
-  };
-
-  useEffect(() => {
-
-    fetchUserProfile();
   }, []);
 
   const handleProfileUpdate = async () => {
@@ -59,15 +32,13 @@ export default function CalendarHeader() {
       await axios.put('http://localhost:3000/api/auth/profile/update', { username: newUsername }, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      setUsers({ ...user, username: newUsername });
+      setUsers({ ...users, username: newUsername });
       setEditingProfile(false);
     } catch (error) {
       console.error('Error updating profile:', error);
       setErrorMessage('Failed to update profile.');
     }
   };
-
-
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -80,19 +51,37 @@ export default function CalendarHeader() {
     navigate('/login');
   };
 
+  const handlePrevMonth = () => {
+    setMonthIndex(monthIndex - 1);
+  };
+
+  const handleNextMonth = () => {
+    setMonthIndex(monthIndex + 1);
+  };
+
+  const handleReset = () => {
+    setMonthIndex(dayjs().month());
+    setDaySelected(dayjs());
+  };
+
+  const handleViewChange = (view) => {
+    setView(view);
+    setDaySelected(dayjs());
+  };
 
   return (
     <header className="header">
       <img src={logo} alt="calendar" />
       <h1>Calendar</h1>
-      <button onClick={handleReset}>Today</button>
-      <button onClick={handlePrevMonth}>
-        <span className="material-icons-outlined">chevron_left</span>
-      </button>
-      <button onClick={handleNextMonth}>
-        <span className="material-icons-outlined">chevron_right</span>
-      </button>
+      <div className="view-buttons">
+        <button onClick={() => handleViewChange("day")}>Day View</button>
+        <button onClick={() => handleViewChange("week")}>Week View</button>
+        <button onClick={() => handleViewChange("month")}>Month View</button>
+      </div>
       <h2>{dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")}</h2>
+      <button onClick={handleReset}>Today</button>
+      <button onClick={handlePrevMonth}>Previous</button>
+      <button onClick={handleNextMonth}>Next</button>
 
       {/* User Profile Section */}
       <div className="user-profile">
@@ -119,6 +108,11 @@ export default function CalendarHeader() {
             {errorMessage && <p className="error-message">{errorMessage}</p>}
           </div>
         )}
+      </div>
+
+      {/* Bookings Button */}
+      <div className="bookings-button">
+        <button onClick={toggleBookings}>Show Bookings</button>
       </div>
     </header>
   );

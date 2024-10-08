@@ -7,7 +7,6 @@ import { Login, ProfileDelete, ProfileGet, ProfileUpdate, Signup } from '../Cont
 
 import express from 'express'
 const router = express.Router()
-
 const authenticate = (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
@@ -18,23 +17,18 @@ const authenticate = (req, res, next) => {
         if (err) {
             return res.status(400).json({ message: 'Invalid token.' });
         }
-        req.user = decoded; // Attach user info to request
+        req.user = decoded; 
         next();
     });
 };
 
-
-
-// Signup
 router.post('/signup', Signup);
-// Login
+
 router.post('/login', Login);
 // Middleware to authenticate the token
-// Get User Profile
 router.get('/profile/get', authenticate, ProfileGet);
-// Update User Profile
+
 router.put('/profile/update', authenticate, ProfileUpdate);
-// Delete User Profile
 router.delete('/profile/delete', authenticate, ProfileDelete);
 
 export default router;

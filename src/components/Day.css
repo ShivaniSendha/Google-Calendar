@@ -1,34 +1,49 @@
 /* Day.css */
 .day-container {
-    border: 1px solid #e5e7eb; 
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem; 
-  }
-  
-  .day-header {
-    text-align: center; 
-  }
-  
-  .day-number {
-    padding: 0.25rem;
-    margin: 0.25rem 0; 
-    border-radius: 9999px;
-  }
-  
-  .current-day {
-    background-color: #3b82f6; 
-    color: white; 
-  }
-  
-  .event {
-    padding: 0.25rem; 
-    margin-right: 0.75rem; 
-    color: #4b5563; 
-    border-radius: 0.25rem; 
-    margin-bottom: 0.25rem; 
-    overflow: hidden; 
-    white-space: nowrap; 
-    text-overflow: ellipsis; 
-  }
-  
+  flex: 1;
+  margin: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Day Header */
+.day-header {
+  text-align: center;
+}
+
+/* Day Number */
+.day-number {
+  padding: 0.25rem;
+  margin: 0.25rem 0;
+  border-radius: 9999px;
+}
+
+/* Current Day Highlight */
+.current-day {
+  background-color: #3b82f6;
+  /* Change this if needed */
+  color: white;
+}
+
+/* Event Styles */
+.event {
+  padding: 0.25rem;
+  margin-right: 0.75rem;
+  color: #4b5563;
+  border-radius: 0.25rem;
+  margin-bottom: 0.25rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Style for Sunday */
+.sunday {
+  color: rgb(0, 255, 13);
+
+}

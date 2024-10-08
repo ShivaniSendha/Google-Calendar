@@ -1,69 +1,58 @@
 .small-calendar {
     background-color: white;
-    /* Background color */
     border-radius: 8px;
-    /* Rounded corners */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    /* Soft shadow */
     padding: 1rem;
-    /* Padding for the calendar */
     max-width: 500px;
-    /* Maximum width for larger screens */
     width: 90%;
-    /* Full width on smaller screens */
     margin: auto;
-    /* Centering the calendar */
     overflow: hidden;
-    /* Prevent overflow */
+ 
 }
 
 .calendar-header {
  
     display: flex;
     justify-content: space-between;
-    /* Space between title and buttons */
+   
     align-items: center;
-    /* Center vertically */
+ 
     margin-bottom: 1rem;
-    /* Space below header */
+ 
 }
 
 .day-label {
     font-weight: bold;
-    /* Bold labels for the days */
+
     color: #4a5568;
-    /* Dark gray color */
+  
     text-align: center;
-    /* Center align */
+ 
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    /* 7 columns for days */
+  
     grid-template-rows: repeat(6, 1fr);
-    /* 6 rows for the month */
+  
 }
 
 .day-button {
     background-color: transparent;
-    /* Transparent background */
+
     border: none;
-    /* No border */
     color: #4a5568;
-    /* Dark gray text */
     padding: 0.5rem;
-    /* Padding around day buttons */
     text-align: center;
-    /* Center text */
+
     cursor: pointer;
-    /* Pointer cursor on hover */
+ 
     transition: background-color 0.2s;
-    /* Smooth transition */
+
     overflow: hidden;
-    /* Prevent text overflow */
     white-space: nowrap;
-    /* Prevent wrapping */
+
 }
 
 .day-button:hover {

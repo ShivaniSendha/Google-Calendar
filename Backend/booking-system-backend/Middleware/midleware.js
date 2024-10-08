@@ -6,7 +6,7 @@ const authMiddleware = (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
         if (err) return res.status(403).json({ message: 'Failed to authenticate token' });
-        req.user = decoded; // Assuming the decoded token contains user info
+        req.user = decoded; 
         next();
     });
 };

@@ -8,7 +8,7 @@ export const CreateBooking = async (req, res) => {
 
     const { title, start, end, room, userId } = req.body;
 
-    // console.log('ghhjjhghjgj', title);
+    // console.log('ghhjjhghjgj', req.body);
 
     try {
         const booking = await Booking.create({ title, start, end, userId, room });
@@ -22,21 +22,25 @@ export const CreateBooking = async (req, res) => {
     }
 };
 export const GetBooking = async (req, res) => {
-
     try {
-        const events = await Booking.find({ userId: req.body.userId }); // Fetch events for the logged-in user
+        // If userId is provided, fetch bookings for that user
+        // If not, fetch all bookings
+        const query = req.body.userId ? { userId: req.body.userId } : {};
+
+        const events = await Booking.find(query);
         return res.json(events);
     } catch (error) {
         console.error('Error fetching events:', error);
         return res.status(500).json({ message: 'Error fetching events' });
     }
 };
+
 export const GetUserEvents = async (req, res) => {
     const userId = req.params.userId;
     console.log('dsjfhdjsfjhdsjfhdsf', userId);
 
     try {
-        const events = await Booking.find({ userId }); // Filter events by userId
+        const events = await Booking.find({ userId });
         res.status(200).json(events);
     } catch (error) {
         console.error('Error fetching user events:', error);
@@ -53,9 +57,9 @@ export const UpdateBooking = async (req, res) => {
     }
 
     try {
-        // Find the booking and ensure the user owns it
+
         const booking = await Booking.findOneAndUpdate(
-            { userId }, // Ensure the user is the owner
+            { userId },
             { title, start, end },
             { new: true }
         );
@@ -72,7 +76,7 @@ export const UpdateBooking = async (req, res) => {
 }
 
 export const DeleteBooking = async (req, res) => {
-    // const bookingId = req.params.id;
+
     const { userId } = req.body;
     console.log(userId);
 

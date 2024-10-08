@@ -14,20 +14,23 @@ export default function Day({ day, rowIdx }) {
 
   useEffect(() => {
     const events = filteredEvents.filter(
-      (evt) =>
-        dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY")
+      (evt) => dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY")
     );
     setDayEvents(events);
   }, [filteredEvents, day]);
 
   function getCurrentDayClass() {
     return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
-      ? "current-day" // Apply the current-day class for styling
+      ? "current-day"
       : "";
   }
 
+  function getDayClass() {
+    return day.day() === 0 ? "sunday" : ""; // Check if the day is Sunday
+  }
+
   return (
-    <div className={`day-container`}>
+    <div className={`day-container ${getDayClass()}`}>
       <header className="day-header">
         {rowIdx === 0 && (
           <p className="text-sm mt-1">

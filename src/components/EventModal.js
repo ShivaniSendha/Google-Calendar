@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import axios from 'axios';
 import GlobalContext from "../context/GlobalContext";
 import '../components/EventModel.css';
@@ -17,7 +17,6 @@ const roomOptions = [
   "Conference 1",
   "Conference 2",
   "Think Tank 2",
-  // Add more room options as needed
 ];
 
 export default function EventModal() {
@@ -26,7 +25,7 @@ export default function EventModal() {
     daySelected,
     dispatchCalEvent,
     selectedEvent,
-    savedEvents, // Assuming this is provided by GlobalContext
+    savedEvents,
   } = useContext(GlobalContext);
 
   const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : "");
@@ -41,13 +40,11 @@ export default function EventModal() {
 
   const token = localStorage.getItem('token');
 
-
   const handleDelete = async () => {
-    if (!selectedEvent || !selectedEvent.id) return; // Prevent delete if no selected event
+    if (!selectedEvent || !selectedEvent.id) return;
 
-    const user = JSON.parse(localStorage.getItem('user')); // Retrieve user object
-    const userId = user ? user.id : null; // Get user ID
-    console.log('fjkdsfhk', selectedEvent.id);
+    const user = JSON.parse(localStorage.getItem('user'));
+    const userId = user ? user.id : null;
 
     try {
       await axios.delete(`http://localhost:3000/api/bookings/Delete/${selectedEvent.id}`, {
@@ -55,9 +52,14 @@ export default function EventModal() {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        data: { userId }, // Pass user ID in the request body
+        data: { userId },
       });
 
+      // Update local storage
+      const updatedSavedEvents = savedEvents.filter(event => event.id !== selectedEvent.id);
+      localStorage.setItem('savedEvents', JSON.stringify(updatedSavedEvents));
+
+      // Update the context and close the modal
       dispatchCalEvent({ type: "delete", payload: selectedEvent });
       setShowEventModal(false);
       Swal.fire({
@@ -87,11 +89,9 @@ export default function EventModal() {
       return;
     }
 
-    // Combine date with start and end times
     const start = `${date}T${startTime}`;
     const end = `${date}T${endTime}`;
 
-    // Check for existing event conflicts
     const hasConflict = savedEvents.some(event => {
       return (
         event.room === room &&
@@ -214,16 +214,7 @@ export default function EventModal() {
             onChange={(e) => setEndTime(e.target.value)}
             required
           />
-          <input
-            type="text"
-            name="description"
-            placeholder="Add a description"
-            value={description}
-            required
-            className="input-field"
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <select value={room} onChange={(e) => setRoom(e.target.value)} required>
+          <select className="room" value={room} onChange={(e) => setRoom(e.target.value)} required>
             <option value="">Select Room</option>
             {roomOptions.map((roomOption, index) => (
               <option key={index} value={roomOption}>{roomOption}</option>
@@ -261,5 +252,3 @@ export default function EventModal() {
     </div>
   );
 }
-
-

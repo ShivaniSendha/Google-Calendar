@@ -1,20 +1,20 @@
 // db/connection.js
-import mongoose from 'mongoose'; // Import Mongoose for MongoDB interaction
-import dotenv from 'dotenv'; // Import dotenv to manage environment variables
+import mongoose from 'mongoose'; 
+import dotenv from 'dotenv';
 
-dotenv.config(); // Load environment variables from .env file
+dotenv.config(); 
 
 const connectDB = async () => {
     try {
         await mongoose.connect('mongodb://localhost:27017/booking-system', {
-            useNewUrlParser: true, // Use the new URL parser
-            useUnifiedTopology: true, // Use the new connection management engine
+            useNewUrlParser: true, 
+            useUnifiedTopology: true,
         });
-        console.log('MongoDB connected successfully'); // Log success message
+        console.log('MongoDB connected successfully'); 
     } catch (err) {
-        console.error('MongoDB connection error:', err); // Log any errors
-        process.exit(1); // Exit the process if the connection fails
+        console.error('MongoDB connection error:', err);
+        process.exit(1); 
     }
 };
 
-export default connectDB; // Export the connectDB function
+export default connectDB;

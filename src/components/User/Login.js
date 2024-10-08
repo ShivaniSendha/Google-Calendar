@@ -13,7 +13,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
-    const { setUserId } = useContext(GlobalContext); // Get setUserId from context
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,20 +22,16 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:3000/api/auth/login', { username, password });
             const { token, user } = response.data;
-
-            localStorage.setItem('token', token);
-            localStorage.setItem('user', JSON.stringify(user));
-
-            // Set userId in global context
-            setUserId(user.userId); // Assuming user object contains userId
-
             Swal.fire({
                 title: "Success",
                 text: "Login successfully!",
                 icon: "success"
             });
+            navigate('/month');
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user));
 
-            navigate('/month'); // Navigate to calendar after successful login
+
         } catch (error) {
             const message = error.response?.data?.message || 'Failed to login. Please try again.';
             setErrorMessage(message);

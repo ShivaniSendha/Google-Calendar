@@ -1,0 +1,96 @@
+/* Week View Container */
+.week-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.day-container {
+    flex: 1;
+    margin: 0 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    transition: background-color 0.3s, transform 0.3s;
+    background-color: #f9f9f9;
+    position: relative;
+    /* For positioning events */
+}
+
+.current-day {
+    background-color: #ffeb3b;
+    /* Highlight today's date */
+}
+
+/* Day Header */
+.day-header {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    color: #555;
+}
+
+/* Day Number Style */
+.day-number {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Event Style */
+.event {
+    background-color: #e3f2fd;
+    border-radius: 4px;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    cursor: pointer;
+
+    position: relative;
+    z-index: 1;
+    /* Ensure events stack correctly */
+}
+
+.event:hover {
+    background-color: #bbdefb;
+}
+
+/* Add a subtle transition effect */
+.day-container:hover {
+    transform: scale(1.02);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .week-container {
+        flex-direction: column;
+    }
+
+    .day-container {
+        margin-bottom: 1rem;
+    }
+
+    .day-number {
+        font-size: 1.5rem;
+    }
+}
+
+/* Optional: Styling for event times */
+.event-time {
+    font-size: 0.9rem;
+    color: #555;
+    display: block;
+    /* Makes it easier to read */
+}
+
+/* Optional: For adding a footer in day containers */
+.day-footer {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #999;
+}

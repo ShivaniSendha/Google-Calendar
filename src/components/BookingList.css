@@ -1,0 +1,33 @@
+.booking-list {
+    padding: 1rem;
+}
+
+.grid1 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+
+}
+
+.booking-item {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 1rem;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    transition: background-color 0.3s;
+
+}
+
+.booking-item:hover {
+    background-color: #e0e0e0;
+
+}
+
+.no-bookings {
+    color: gray;
+    font-style: italic;
+    text-align: center;
+    margin-top: 20px;
+}
